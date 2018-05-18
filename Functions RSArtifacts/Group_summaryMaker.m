@@ -1,0 +1,13 @@
+function [GroupSet] = Group_summaryMaker(GroupSet) 
+[GroupSet.E1]=eSummaryMaker(GroupSet.E1);
+% [GroupSet.E2]=eSummaryMaker(GroupSet.E2);
+% [GroupSet.E4]=eSummaryMaker(GroupSet.E4);
+% [GroupSet.E12]=eSummaryMaker(GroupSet.E12);
+
+%createGroup Summary
+GroupSet.GeSummary=[GroupSet.E1.ImageMetrics.eSummary;...
+                    %GroupSet.E2.ImageMetrics.eSummary;...
+                    %GroupSet.E4.ImageMetrics.eSummary;...
+                    %GroupSet.E12.ImageMetrics.eSummary...
+                    ];
+                    

@@ -1,0 +1,2 @@
+win,w_sup,w_inf,speed,radius,ver,Iclims_1,Iclims_2,counterCWise,fl_low,fl_high,Bdiam,wflip,Arrasize,f_points,File_ref,File_target,Name
+1,8,15,250000000,0.2675,100,0,6e-09,0,1000000000,8000000000,0.1416,1,72,1001,Mono_[A]HalfRef_[P3]_AfterCal_(faW_z0_a2090k_l72)_10_26_2015_612.txt,Mono_[B]PosY_XY_[P2]_AfterCa(faW_z2_a2090k_l72)_10_26_2015_524.txt,TeSt _Diego

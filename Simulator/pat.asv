@@ -1,0 +1,4 @@
+%Antenna field pattern
+function [field]=pat(W);
+field=10*cos(W);
+% field=abs(sinc(W));

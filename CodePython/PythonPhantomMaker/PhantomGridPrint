@@ -1,0 +1,116 @@
+# PhantomGridPrint
+# V 0.1 on May 8th 2017
+# Made by Mario [M}
+# Generates a grid with the location of fibroglandular patches and phantoms.
+
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib as mpl
+import datetime
+import numpy as np
+
+# params = {'legend.fontsize': 'x-large',
+#             'axes.titlesize'    : 'x-large',
+#             'xtick.labelsize'   : 'x-large',
+#             'ytick.labelsize'   : 'x-large'}
+# mpl.rcParams.update(params)
+
+
+
+mpl.rcParams['font.family'] = 'Times New Roman'
+mpl.rcParams['font.size'] = 11
+mpl.rcParams['font.weight'] = 'ultralight'
+# print(mpl.font.family())
+
+
+
+# -----------------------------------------------------------------------------------------
+CAB_D_diameter = 14.16    # CAB-D diameter=156 length=144 But at the point of inspection diameter was 14.16
+patch_center = (3.75, -2.25)
+tumor_center = (-2.25, -3.75)
+
+#  patch1 = plt.Circle(-2.5, 2.5), 1, color='g')
+patch2 = plt.Circle(patch_center, 1, color='g')
+tumor1 = plt.Circle(tumor_center, 1, color=(1, .15, .15), linestyle=':', linewidth=1.5)
+
+white1 = plt.Circle((0, 0), CAB_D_diameter / 2, facecolor='w', fill=True)
+skin1 = plt.Circle((0, 0), CAB_D_diameter / 2, facecolor=(155/255, 155/255, 220/255), linestyle=':', fill=True, linewidth=3, alpha=0.2, edgecolor=(0.7, 0.7, 0.9))
+
+fig, ax = plt.subplots()  # note we must use plt.subplots, not plt.subplot
+# (or if you have an existing figure)
+# fig = plt.gcf()
+# ax = fig.gca()
+
+# ax.add_artist(patch1)
+# ax.add_artist(white1)
+ax.add_artist(patch2)
+ax.add_artist(tumor1)
+ax.add_artist(skin1)
+
+
+#ax.set_title('Text in a cool font')
+
+
+'Plot array of antennas Using plt'
+# theta goes from 0 to 2pi
+theta = np.linspace(0, 2*np.pi, 72)
+# the radius of the circle
+r = 10.16
+# compute x1 and x2
+x1 = r*np.cos(theta)
+x2 = r*np.sin(theta)
+# create the figure
+few_antennas, = ax.plot(x1, x2, 'ko', markersize=5, color='0.75', label='Scan with 72 probing points')
+
+
+theta = np.linspace(0, 2*np.pi, 288)
+# the radius of the circle
+r = 10.16
+# compute x1 and x2
+x1 = r*np.cos(theta)
+x2 = r*np.sin(theta)
+# create the figure
+all_antennas, = ax.plot(x1, x2, '.', markersize=2, color='0.25', label='Scan with 288 probing points')
+
+
+#plt.legend(handles=[all_antennas, few_antennas], loc=1)
+
+
+
+'Plot the Markers'
+plt.plot(0, 0, 'k+', markersize=16)
+plt.plot(patch_center[0], patch_center[1], 'w.', markersize=4)
+plt.plot(tumor_center[0], tumor_center[1], 'w.', markersize=4)
+# plt.plot([0, patch_center[0]], [0, patch_center[1]], 'gray')  # lines that go the center
+# plt.plot([0, tumor_center[0]], [0, tumor_center[1]], 'gray')
+
+'Define image characteristics'
+plt.xlim(-10.5, 10.5)
+plt.ylim(-10.5, 10.5)
+plt.xlabel('x-axis (cm)')  # fontname="Times New Roman", fontsize=16)
+plt.ylabel('y-axis (cm)')  # fontname="Times New Roman", fontsize=16)
+
+ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.3)
+ax.xaxis.grid(color='gray', linestyle='dashed', alpha=0.3)
+ax.set_axisbelow(True)
+
+
+plt.grid(True)  # make the grid appear
+tick_spacing = 5
+ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+ax.yaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+plt.gca().set_aspect('equal', adjustable='box')
+
+plt.show()
+
+"Save figure that has just been created to a file for later use"
+today = datetime.date.today()
+today_day = '{:%b_%d}'.format(today)
+
+figPath = 'G:\Dropbox\ResearchMagic\T H E S I S\Chapter 2\ch2FigFolder\ '
+figName = ('PhantomGenerated_'+today_day+'300.png')
+print(figName)
+fig.savefig(figPath + figName, dpi=300)
+
+
+
